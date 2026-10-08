@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light;
+
+  --text: #35483c;
+  --text-h: #17291e;
+  --bg: #f5faf6;
+  --surface: #ffffff;
+  --border: #dce9df;
+  --code-bg: #edf5ef;
+
+  --accent: #18754b;
+  --accent-hover: #105e3a;
+  --accent-bg: #e6f4eb;
+  --accent-border: #a9d8b9;
+
+  --green: #198754;
+  --green-hover: #126b42;
+  --green-bg: #e5f3e9;
+
+  --navbar-bg: #ffffff;
+  --shadow:
+    rgba(24, 75, 48, 0.1) 0 10px 15px -3px,
+    rgba(24, 75, 48, 0.06) 0 4px 6px -2px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --text: #d8d0e2;
+  --text-h: #faf7ff;
+  --bg: #15121a;
+  --surface: #201a27;
+  --border: #3b3046;
+  --code-bg: #292230;
+
+  --accent: #c9a0f2;
+  --accent-hover: #d9bafa;
+  --accent-bg: #342441;
+  --accent-border: #71518c;
+
+  --green: #78d6a7;
+  --green-hover: #9ae6bd;
+  --green-bg: #20392e;
+
+  --navbar-bg: #1c1722;
+  --shadow:
+    rgba(0, 0, 0, 0.3) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
+}
+
+body,
+#root {
+  color: var(--text);
+  background: var(--bg);
+}
+
+:root.texto-maior {
+  font-size: 20px;
+}
+
+@media (max-width: 1024px) {
+  :root.texto-maior {
+    font-size: 18px;
+  }
+}
