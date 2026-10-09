@@ -3,8 +3,10 @@
 
   --text: #35483c;
   --text-h: #17291e;
+  --muted: #64746a;
   --bg: #f5faf6;
   --surface: #ffffff;
+  --surface-alt: #e8f1e8;
   --border: #dce9df;
   --code-bg: #edf5ef;
 
@@ -12,15 +14,46 @@
   --accent-hover: #105e3a;
   --accent-bg: #e6f4eb;
   --accent-border: #a9d8b9;
-
+  --vlibras-btn-outline: 2px solid var(--accent);
+  --vlibras-btn-focus-visible-outline: 3px solid var(--text-h);
+  --vlibras-btn-focus-visible-shadow: 0 0 0 4px var(--accent-bg);
+  --vlibras-btn-hover-filter: brightness(1.15);
   --green: #198754;
   --green-hover: #126b42;
   --green-bg: #e5f3e9;
 
   --navbar-bg: #ffffff;
+  --about-card-bg: #dceede;
+  --about-card-border: #c2dec5;
+  --feature-card-bg: #e4f1e6;
+  --feature-card-border: #d1e6d5;
+  --skills-card-bg: #edf5ee;
+  --skills-card-border: #dce9df;
+  --tag-bg: #dcefe1;
+  --tag-border: #c4e0cb;
+  --tag-text: #255d3e;
+  --project-visual-bg: #edf5ee;
+  --button-text: #ffffff;
+  --footer-bg: #e2f0e4;
+  --footer-text: #3b5544;
+  --footer-heading: #17291e;
+  --footer-item-bg: rgba(255, 255, 255, 0.7);
+  --footer-item-border: #cfe2d2;
+
   --shadow:
-    rgba(24, 75, 48, 0.1) 0 10px 15px -3px,
-    rgba(24, 75, 48, 0.06) 0 4px 6px -2px;
+    rgba(24, 75, 48, 0.09) 0 12px 28px -12px,
+    rgba(24, 75, 48, 0.06) 0 4px 9px -5px;
+
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 16px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: var(--text);
+  background: var(--bg);
 }
 
 :root[data-theme="dark"] {
@@ -28,8 +61,10 @@
 
   --text: #d8d0e2;
   --text-h: #faf7ff;
+  --muted: #b4a9c0;
   --bg: #15121a;
   --surface: #201a27;
+  --surface-alt: #2b2333;
   --border: #3b3046;
   --code-bg: #292230;
 
@@ -37,21 +72,149 @@
   --accent-hover: #d9bafa;
   --accent-bg: #342441;
   --accent-border: #71518c;
-
   --green: #78d6a7;
   --green-hover: #9ae6bd;
   --green-bg: #20392e;
 
   --navbar-bg: #1c1722;
+  --about-card-bg: #2b2333;
+  --about-card-border: #493b57;
+  --feature-card-bg: #292333;
+  --feature-card-border: #44374f;
+  --skills-card-bg: #241e2d;
+  --skills-card-border: #3b3046;
+  --tag-bg: #382747;
+  --tag-border: #59436e;
+  --tag-text: #eadcf8;
+  --project-visual-bg: #292230;
+  --button-text: #21152e;
+  --footer-bg: #211a29;
+  --footer-text: #d8d0e2;
+  --footer-heading: #faf7ff;
+  --footer-item-bg: rgba(32, 26, 39, 0.74);
+  --footer-item-border: #44364f;
+
   --shadow:
     rgba(0, 0, 0, 0.3) 0 10px 15px -3px,
     rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
+}
+
+:root.alto-contraste {
+  color-scheme: light;
+
+  --text: #111111;
+  --text-h: #000000;
+  --muted: #222222;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f2f2f2;
+  --border: #000000;
+  --code-bg: #f0f0f0;
+  --accent: #004a24;
+  --accent-hover: #003519;
+  --accent-bg: #e8ffef;
+  --accent-border: #004a24;
+  --vlibras-btn-outline: 2px solid #000000;
+  --vlibras-btn-focus-visible-outline: 3px solid #000000;
+  --vlibras-btn-focus-visible-shadow: 0 0 0 4px #004a24;
+  --green: #004a24;
+  --green-hover: #003519;
+  --green-bg: #e8ffef;
+  --navbar-bg: #ffffff;
+  --about-card-bg: #ffffff;
+  --about-card-border: #000000;
+  --feature-card-bg: #ffffff;
+  --feature-card-border: #000000;
+  --skills-card-bg: #ffffff;
+  --skills-card-border: #000000;
+  --tag-bg: #e8ffef;
+  --tag-border: #004a24;
+  --tag-text: #003519;
+  --project-visual-bg: #ffffff;
+  --button-text: #ffffff;
+  --footer-bg: #ffffff;
+  --footer-text: #111111;
+  --footer-heading: #000000;
+  --footer-item-bg: #ffffff;
+  --footer-item-border: #000000;
+  --shadow: 0 0 0 1px #000000;
+}
+
+:root[data-theme="dark"].alto-contraste {
+  color-scheme: dark;
+
+  --text: #ffffff;
+  --text-h: #ffffff;
+  --muted: #f2f2f2;
+  --bg: #000000;
+  --surface: #000000;
+  --surface-alt: #111111;
+  --border: #ffffff;
+  --code-bg: #111111;
+  --accent: #e5ff60;
+  --accent-hover: #ffffff;
+  --accent-bg: #181818;
+  --accent-border: #ffffff;
+  --vlibras-btn-outline: 2px solid #ffffff;
+  --vlibras-btn-focus-visible-outline: 3px solid #ffffff;
+  --vlibras-btn-focus-visible-shadow: 0 0 0 4px #e5ff60;
+  --green: #e5ff60;
+  --green-hover: #ffffff;
+  --green-bg: #181818;
+  --navbar-bg: #000000;
+  --about-card-bg: #000000;
+  --about-card-border: #ffffff;
+  --feature-card-bg: #000000;
+  --feature-card-border: #ffffff;
+  --skills-card-bg: #000000;
+  --skills-card-border: #ffffff;
+  --tag-bg: #000000;
+  --tag-border: #ffffff;
+  --tag-text: #ffffff;
+  --project-visual-bg: #000000;
+  --button-text: #000000;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+  --footer-heading: #ffffff;
+  --footer-item-bg: #000000;
+  --footer-item-border: #ffffff;
+  --shadow: 0 0 0 1px #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.75rem;
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: inherit;
+  line-height: 1.55;
 }
 
 body,
 #root {
   color: var(--text);
   background: var(--bg);
+}
+
+#root {
+  min-height: 100svh;
+}
+
+button,
+input {
+  font: inherit;
 }
 
 :root.texto-maior {
@@ -61,5 +224,11 @@ body,
 @media (max-width: 1024px) {
   :root.texto-maior {
     font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

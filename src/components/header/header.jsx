@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import iconeBranco from '../../assets/icons/configuracoes-branco.svg';
 import iconePreto from '../../assets/icons/configuracoes-preto.svg';
+import Dialog from '../modals/Dialog.jsx';
 import './header.css';
 
 function Header() {
@@ -8,7 +9,13 @@ function Header() {
     () => localStorage.getItem('tema') || 'light'
   );
   const [textoMaior, setTextoMaior] = useState(false);
+  const [altoContraste, setAltoContraste] = useState(
+    () => localStorage.getItem('altoContraste') === 'true'
+  );
+  const [estadoLibras, setEstadoLibras] = useState('inativo');
   const [configuracoesAbertas, setConfiguracoesAbertas] = useState(false);
+  const [avisoAcessibilidadeAberto, setAvisoAcessibilidadeAberto] =
+    useState(false);
 
   const headerRef = useRef(null);
   const iconeRef = useRef(null);
@@ -23,7 +30,27 @@ function Header() {
     raiz.dataset.bsTheme = tema;
     localStorage.setItem('tema', tema);
     raiz.classList.toggle('texto-maior', textoMaior);
-  }, [tema, textoMaior]);
+    raiz.classList.toggle('alto-contraste', altoContraste);
+    localStorage.setItem('altoContraste', String(altoContraste));
+  }, [tema, textoMaior, altoContraste]);
+
+  useEffect(() => {
+    if (localStorage.getItem('portfolio-aviso-acessibilidade') === 'true') {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(
+      () => setAvisoAcessibilidadeAberto(true),
+      900
+    );
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  function fecharAvisoAcessibilidade() {
+    localStorage.setItem('portfolio-aviso-acessibilidade', 'true');
+    setAvisoAcessibilidadeAberto(false);
+  }
 
   // Fecha o painel clicando fora dele ou pressionando Esc
   useEffect(() => {
@@ -62,6 +89,36 @@ function Header() {
   function alternarTema() {
     setTema((atual) => (atual === 'dark' ? 'light' : 'dark'));
   }
+
+  function ativarVLibras() {
+    if (estadoLibras === 'carregando') return;
+
+    if (estadoLibras === 'carregado') {
+      window.VLibrasWidget?.initBtn?.click();
+      return;
+    }
+
+    setEstadoLibras('carregando');
+
+    const script = document.createElement('script');
+    script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+    script.async = true;
+    script.dataset.vlibrasWidget = 'true';
+    script.onload = () => setEstadoLibras('carregado');
+    script.onerror = () => {
+      script.remove();
+      setEstadoLibras('erro');
+    };
+
+    document.body.appendChild(script);
+  }
+
+  const mensagemLibras = {
+    inativo: 'Carregue o widget oficial de tradução para Libras.',
+    carregando: 'Carregando o widget do VLibras…',
+    carregado: 'Widget pronto. Use o botão flutuante para iniciar a tradução.',
+    erro: 'Não foi possível carregar. Verifique a conexão e tente novamente.',
+  }[estadoLibras];
 
   return (
     <header className="site-header" ref={headerRef}>
@@ -157,7 +214,115 @@ function Header() {
             onChange={(evento) => setTextoMaior(evento.target.checked)}
           />
         </div>
+
+        <div className="settings-option">
+          <label className="settings-option__label" htmlFor="alto-contraste">
+            Alto contraste
+          </label>
+
+          <input
+            className="accessibility-switch"
+            type="checkbox"
+            id="alto-contraste"
+            role="switch"
+            checked={altoContraste}
+            aria-checked={altoContraste}
+            onChange={(evento) => setAltoContraste(evento.target.checked)}
+          />
+        </div>
+
+        <div className="settings-option settings-option--stacked">
+          <div className="settings-option__copy">
+            <span className="settings-option__label">VLibras</span>
+            <span
+              className="settings-option__description"
+              id="status-vlibras"
+              aria-live="polite"
+            >
+              {mensagemLibras}
+            </span>
+          </div>
+
+          <button
+            className={`vlibras-button vlibras-button--${estadoLibras}`}
+            type="button"
+            aria-describedby="status-vlibras"
+            onClick={ativarVLibras}
+            disabled={estadoLibras === 'carregando'}
+          >
+            <i className="bi bi-translate" aria-hidden="true"></i>
+            {estadoLibras === 'carregando'
+              ? 'Carregando…'
+              : estadoLibras === 'carregado'
+                ? 'Abrir VLibras'
+                : estadoLibras === 'erro'
+                  ? 'Tentar novamente'
+                  : 'Ativar VLibras'}
+          </button>
+        </div>
+
+        <button
+          className="settings-info-button"
+          type="button"
+          onClick={() => setAvisoAcessibilidadeAberto(true)}
+        >
+          <i className="bi bi-info-circle" aria-hidden="true"></i>
+          Sobre recursos de acessibilidade
+        </button>
       </section>
+
+      <Dialog
+        open={avisoAcessibilidadeAberto}
+        onClose={fecharAvisoAcessibilidade}
+        labelledBy="accessibility-dialog-title"
+        describedBy="accessibility-dialog-description"
+        className="accessibility-dialog"
+      >
+        <div className="dialog-content">
+          <div className="dialog-header">
+            <div className="dialog-header__copy">
+              <p className="dialog-eyebrow">Acessibilidade</p>
+              <h2 className="dialog-title" id="accessibility-dialog-title">
+                Ajuste o site para você
+              </h2>
+            </div>
+            <button
+              className="dialog-close"
+              type="button"
+              aria-label="Fechar aviso de acessibilidade"
+              onClick={fecharAvisoAcessibilidade}
+            >
+              <i className="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <p className="dialog-copy" id="accessibility-dialog-description">
+            As opções de acessibilidade ficam no ícone de engrenagem, no topo da
+            página. Você pode trocar o tema, aumentar o texto, ativar alto
+            contraste ou carregar o VLibras.
+          </p>
+
+          <div className="dialog-actions">
+            <button
+              className="dialog-button"
+              type="button"
+              onClick={fecharAvisoAcessibilidade}
+            >
+              Entendi
+            </button>
+            <button
+              className="dialog-button dialog-button--secondary"
+              type="button"
+              onClick={() => {
+                fecharAvisoAcessibilidade();
+                setConfiguracoesAbertas(true);
+              }}
+            >
+              Abrir configurações
+            </button>
+          </div>
+        </div>
+      </Dialog>
     </header>
   );
 }
