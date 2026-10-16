@@ -279,10 +279,10 @@ function Home() {
 
         <section
           className="projects-section page-section"
-          id="projetos"
+          
           aria-labelledby="titulo-projetos"
         >
-          <div className="section-heading section-heading--row" data-reveal>
+          <div className="section-heading section-heading--row" data-reveal id="projetos">
             <div>
               <p className="eyebrow">Trabalhos selecionados</p>
               <h2 id="titulo-projetos">Projetos</h2>
