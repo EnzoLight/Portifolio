@@ -1,3 +1,6 @@
+import React from "react";
+import LogoCheer from "../assets/icons/LogoCheer.png";
+
 export const projectStatuses = {
   ativo: { label: 'ATIVO', className: 'project-status--ativo' },
   indisponivel: {
@@ -18,17 +21,17 @@ export const projectStatuses = {
 export const projects = [
   {
     id: 'gestao-voluntarios',
-    title: 'Plataforma de Gestão de Voluntários',
-    category: 'Projeto acadêmico',
+    title: 'Cheer - Plataforma de Gestão de Voluntários',
+    category: 'Projeto acadêmico - Gestor de Eventos',
     summary:
-      'Projeto acadêmico de gestão de voluntários, desenvolvido durante minha formação em Desenvolvimento de Software Multiplataforma.',
-    details: '',
-    languages: [],
-    tools: [],
+      'Projeto focado na gestão de voluntários e eventos beneficientes, desenvolvido durante meu 4° Semestre de Desenvolvimento de Software Multiplataforma.',
+    details: 'Feito em uma API em (...), consumida pelo front em React para o web e com Kotlin para a versão mobile, o Cheer surgiu como uma ideia de facilitar e abrangir',
+    languages: ['React', 'Kotlin', 'JavaScript', 'PHP' ],
+    tools: ['GitHub', 'Android Studio', 'VScode'],
     repositoryUrl: '',
     applicationUrl: '',
     // Estado inicial para editar conforme a situação real do projeto.
     status: 'emConstrucao',
-    icon: 'bi-people',
+    icon: LogoCheer,
   },
 ];

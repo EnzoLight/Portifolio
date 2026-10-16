@@ -148,7 +148,7 @@ function Home() {
           <div className="hero-copy" data-reveal>
             <p className="eyebrow">Olá, bem-vindo(a) ao meu portfólio!</p>
             <h1 id="titulo-home">
-              Oi, eu sou <span>Enzo.</span>
+              Oi, eu sou <span>Enzo</span>
             </h1>
             <p className="hero-lead">
               Sou estudante de Desenvolvimento de Software Multiplataforma na
@@ -194,10 +194,9 @@ function Home() {
 
         <section
           className="resume-section page-section"
-          id="curriculo"
           aria-labelledby="titulo-curriculo"
         >
-          <div className="section-heading" data-reveal>
+          <div className="section-heading" data-reveal id="curriculo">
             <p className="eyebrow">Minha trajetória</p>
             <h2 id="titulo-curriculo">Formação, experiência e habilidades</h2>
             <p>Um resumo do que venho aprendendo e construindo.</p>
@@ -349,7 +348,15 @@ function Home() {
                     <span className="project-visual" aria-hidden="true">
                       <span className="project-visual-shape project-visual-shape--one"></span>
                       <span className="project-visual-shape project-visual-shape--two"></span>
-                      <i className={`bi ${project.icon || 'bi-code-slash'}`}></i>
+                      {project.icon ? (
+                        <img
+                          className="project-visual__icon"
+                          src={project.icon}
+                          alt=""
+                        />
+                      ) : (
+                        <i className="bi bi-code-slash" aria-hidden="true"></i>
+                      )}
                     </span>
 
                     <span className="project-card-content">
@@ -376,7 +383,6 @@ function Home() {
 
                       <span className="project-link">
                         Ver detalhes
-                        <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
                       </span>
                     </span>
                   </button>
@@ -506,6 +512,16 @@ function Home() {
 
             <a
               className="contact-item"
+              href=""
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="contact-icon"><i className="bi bi-envelope" aria-hidden="true"></i></span>
+              <span><strong>Email</strong><small>enzoluzgranatobarbosa@gmail.com</small></span>
+            </a>
+
+            <a
+              className="contact-item"
               href="https://wa.me/5511964465116"
               target="_blank"
               rel="noreferrer"
@@ -513,6 +529,16 @@ function Home() {
             >
               <span className="contact-icon"><i className="bi bi-whatsapp" aria-hidden="true"></i></span>
               <span><strong>WhatsApp</strong><small>+55 (11) 96446-5116</small></span>
+            </a>
+
+            <a
+              className="contact-item"
+              href="https://www.linkedin.com/in/enzo-luz-granato-barbosa-71183b2a6"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="contact-icon"><i className="bi bi-linkedin" aria-hidden="true"></i></span>
+              <span><strong>Linkedin</strong><small>www.linkedin.com/in/enzo-luz-granato-barbosa-71183b2a6</small></span>
             </a>
           </div>
 
