@@ -1,6 +1,7 @@
 import React from "react";
 import LogoCheer from "../assets/icons/LogoCheer.png";
 import LogoStarline from "../assets/icons/LogoStarline.jpg";
+import LogoNeverend from "../assets/icons/LogoNeverSystem.png";
 
 export const projectStatuses = {
   ativo: { label: 'ATIVO', className: 'project-status--ativo' },
@@ -32,7 +33,7 @@ export const projects = [
     repositoryUrl: 'https://github.com/Cheer-Gestao-de-voluntarios',
     applicationUrl: '',
     // Estado inicial para editar conforme a situação real do projeto.
-    status: 'ativo',
+    status: 'indisponivel',
     icon: LogoCheer,
   },
   {
@@ -47,5 +48,18 @@ export const projects = [
     applicationUrl: '',
     status: 'finalizado',
     icon: LogoStarline,
-  }
+  },
+  {
+    id: 'gestao-rpg',
+    title: 'Neverend - Sistema de Gestão de RPG',
+    category: 'Projeto acadêmico - Gestor de RPG',
+    summary: 'Projeto em construção que visa facilitar e digitalizar campanhas de RPG, seus personagens e seus jogadores.',
+    details: 'Aplicação está sendo feita em React Typescript para o frontend Web, com o mobile em Flutter e Dart. A API ainda está sendo desenvolvida, utilizando PostgreSQL. Também queremos implementar até o fim do curso um outro sistema em C++ de rolagem de dados em uma torre real, o qual digitaliza o resultado de um dado real e computa no sistema com uma animação.',
+    languages: ['TypeScript', 'React', 'Flutter', 'Dart', 'SQL', 'C++' ],
+    tools: ['GitHub', 'VScode', 'PostgreSQL', 'Android Studio'],
+    repositoryUrl: 'https://github.com/never-system',
+    applicationUrl: '',
+    status: 'emConstrucao',
+    icon: LogoNeverend,
+  },
 ];

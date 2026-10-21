@@ -146,9 +146,9 @@ function Home() {
       <main className="portfolio-main">
         <section className="home-hero" id="sobre" aria-labelledby="titulo-home">
           <div className="hero-copy" data-reveal>
-            <p className="eyebrow">Olá, bem-vindo(a) ao meu portfólio!</p>
+            <p className="eyebrow">Bem-vindo(a) ao meu portfólio!</p>
             <h1 id="titulo-home">
-              Oi, eu sou <span>Enzo</span>
+              Eu sou o <span>Enzo</span>
             </h1>
             <p className="hero-lead">
               Sou estudante de Desenvolvimento de Software Multiplataforma na
